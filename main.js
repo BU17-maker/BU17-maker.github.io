@@ -101,7 +101,7 @@ const utils = {
 const navbar = {
     init: async () => {
         try {
-            const response = await fetch('_navbar-v2.html');
+            const response = await fetch('_navbar.html');
             const navbarHTML = await response.text();
             document.getElementById('navbar-container').innerHTML = navbarHTML;
             navbar.bindEvents();
@@ -135,12 +135,12 @@ const navbar = {
     },
 
     setActive: () => {
-        const currentPage = window.location.pathname.split('/').pop() || 'index-v2.html';
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         const navLinks = document.querySelectorAll('.nav-link');
         
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
-            if (href === currentPage || (currentPage === '' && href === 'index-v2.html')) {
+            if (href === currentPage || (currentPage === '' && href === 'index.html')) {
                 link.classList.add('active');
             }
         });
@@ -612,26 +612,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     global.init();
     
     // 根据页面初始化特定功能
-    const currentPage = window.location.pathname.split('/').pop() || 'index-v2.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
     switch (currentPage) {
-        case 'index-v2.html':
+        case 'index.html':
         case '':
             // 主页功能已在全局中处理
             break;
-        case 'projects-v2.html':
+        case 'projects.html':
             projects.init();
             break;
-        case 'cpp-v2.html':
+        case 'cpp.html':
             cppTemplates.init();
             break;
-        case 'mistakes-v2.html':
+        case 'mistakes.html':
             mistakes.init();
             break;
-        case 'tools-v2.html':
+        case 'tools.html':
             tools.init();
             break;
-        case 'roadmap-v2.html':
+        case 'roadmap.html':
             roadmap.init();
             break;
     }
