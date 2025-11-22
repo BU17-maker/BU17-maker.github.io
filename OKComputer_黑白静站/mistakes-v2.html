@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错题本 - 我的工具箱</title>
+    <link rel="stylesheet" href="style-v2.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+    
+    <main class="container">
+        <header class="page-header">
+            <h1>错题本</h1>
+            <p class="subtitle">记录犯过的错误，避免重蹈覆辙</p>
+        </header>
+
+        <div class="mistake-controls">
+            <button class="btn-add" onclick="openAddMistakeModal()">+ 添加错题</button>
+            <div class="filter-controls">
+                <select id="difficulty-filter">
+                    <option value="all">全部难度</option>
+                    <option value="easy">简单</option>
+                    <option value="medium">中等</option>
+                    <option value="hard">困难</option>
+                </select>
+                <select id="category-filter">
+                    <option value="all">全部分类</option>
+                    <option value="algorithm">算法错误</option>
+                    <option value="implementation">实现错误</option>
+                    <option value="logic">逻辑错误</option>
+                    <option value="syntax">语法错误</option>
+                </select>
+                <select id="status-filter">
+                    <option value="all">全部状态</option>
+                    <option value="pending">待解决</option>
+                    <option value="solved">已解决</option>
+                    <option value="reviewed">已复习</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mistakes-list" id="mistakes-list">
+            <!-- 示例错题 -->
+            <div class="mistake-card" data-difficulty="medium" data-category="algorithm" data-status="solved">
+                <div class="mistake-header">
+                    <div class="mistake-title">
+                        <h3>线段树区间更新错误</h3>
+                        <span class="mistake-tag algorithm">算法错误</span>
+                        <span class="mistake-tag medium">中等</span>
+                    </div>
+                    <div class="mistake-meta">
+                        <span class="mistake-date">2024-11-15</span>
+                        <span class="mistake-status solved">已解决</span>
+                    </div>
+                </div>
+                <div class="mistake-content">
+                    <div class="mistake-problem">
+                        <h4>问题描述</h4>
+                        <p>在使用线段树进行区间更新时，忘记处理lazy标记的传递，导致更新结果不正确。</p>
+                    </div>
+                    <div class="mistake-code">
+                        <h4>错误代码</h4>
+                        <pre><code>// 错误：没有push_down
+void update(int p, int l, int r, int L, int R, ll val) {
+    if (L <= l && r <= R) {
+        tree[p].sum += val * (r - l + 1);
+        tree[p].lazy += val;
+        return;
+    }
+    // 缺少 push_down(p, l, r);
+    int mid = (l + r) >> 1;
+    if (L <= mid) update(p*2, l, mid, L, R, val);
+    if (R > mid) update(p*2+1, mid+1, r, L, R, val);
+    tree[p].sum = tree[p*2].sum + tree[p*2+1].sum;
+}</code></pre>
+                    </div>
+                    <div class="mistake-analysis">
+                        <h4>错误分析</h4>
+                        <p>在进行区间更新时，如果当前节点不完全包含在更新区间内，需要先下推lazy标记到子节点，否则子节点的值不会更新。</p>
+                    </div>
+                    <div class="mistake-solution">
+                        <h4>正确解法</h4>
+                        <pre><code>void push_down(int p, int l, int r) {
+    if (tree[p].lazy) {
+        int mid = (l + r) >> 1;
+        tree[p*2].sum += tree[p].lazy * (mid - l + 1);
+        tree[p*2+1].sum += tree[p].lazy * (r - mid);
+        tree[p*2].lazy += tree[p].lazy;
+        tree[p*2+1].lazy += tree[p].lazy;
+        tree[p].lazy = 0;
+    }
+}
+
+void update(int p, int l, int r, int L, int R, ll val) {
+    if (L <= l && r <= R) {
+        tree[p].sum += val * (r - l + 1);
+        tree[p].lazy += val;
+        return;
+    }
+    push_down(p, l, r);  // 关键：先下推lazy标记
+    int mid = (l + r) >> 1;
+    if (L <= mid) update(p*2, l, mid, L, R, val);
+    if (R > mid) update(p*2+1, mid+1, r, L, R, val);
+    tree[p].sum = tree[p*2].sum + tree[p*2+1].sum;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="mistake-footer">
+                    <div class="mistake-tags">
+                        <span class="tag">线段树</span>
+                        <span class="tag">lazy标记</span>
+                        <span class="tag">区间更新</span>
+                    </div>
+                    <div class="mistake-actions">
+                        <button class="btn-edit" onclick="editMistake(this)">编辑</button>
+                        <button class="btn-delete" onclick="deleteMistake(this)">删除</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mistake-card" data-difficulty="easy" data-category="implementation" data-status="pending">
+                <div class="mistake-header">
+                    <div class="mistake-title">
+                        <h3>数组越界访问</h3>
+                        <span class="mistake-tag implementation">实现错误</span>
+                        <span class="mistake-tag easy">简单</span>
+                    </div>
+                    <div class="mistake-meta">
+                        <span class="mistake-date">2024-11-18</span>
+                        <span class="mistake-status pending">待解决</span>
+                    </div>
+                </div>
+                <div class="mistake-content">
+                    <div class="mistake-problem">
+                        <h4>问题描述</h4>
+                        <p>在循环中使用了错误的边界条件，导致数组越界访问。</p>
+                    </div>
+                    <div class="mistake-code">
+                        <h4>错误代码</h4>
+                        <pre><code>// 错误：循环条件应该是 i < n，而不是 i <= n
+for (int i = 0; i <= n; i++) {
+    arr[i] = some_value;  // 当i == n时越界
+}</code></pre>
+                    </div>
+                    <div class="mistake-analysis">
+                        <h4>错误分析</h4>
+                        <p>C++中数组索引从0开始，长度为n的数组有效索引范围是[0, n-1]。循环条件写错是常见的低级错误。</p>
+                    </div>
+                    <div class="mistake-solution">
+                        <h4>正确解法</h4>
+                        <pre><code>// 正确：i < n
+for (int i = 0; i < n; i++) {
+    arr[i] = some_value;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="mistake-footer">
+                    <div class="mistake-tags">
+                        <span class="tag">数组</span>
+                        <span class="tag">边界条件</span>
+                        <span class="tag">越界</span>
+                    </div>
+                    <div class="mistake-actions">
+                        <button class="btn-edit" onclick="editMistake(this)">编辑</button>
+                        <button class="btn-delete" onclick="deleteMistake(this)">删除</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mistake-card" data-difficulty="hard" data-category="logic" data-status="reviewed">
+                <div class="mistake-header">
+                    <div class="mistake-title">
+                        <h3>动态规划状态转移错误</h3>
+                        <span class="mistake-tag logic">逻辑错误</span>
+                        <span class="mistake-tag hard">困难</span>
+                    </div>
+                    <div class="mistake-meta">
+                        <span class="mistake-date">2024-11-10</span>
+                        <span class="mistake-status reviewed">已复习</span>
+                    </div>
+                </div>
+                <div class="mistake-content">
+                    <div class="mistake-problem">
+                        <h4>问题描述</h4>
+                        <p>在最长上升子序列问题中，状态转移方程考虑不周全，漏掉了一些情况。</p>
+                    </div>
+                    <div class="mistake-code">
+                        <h4>错误代码</h4>
+                        <pre><code>// 错误：只考虑了dp[i] = max(dp[j] + 1)
+int lis(const vector<int>& arr) {
+    int n = arr.size();
+    vector<int> dp(n, 1);
+    
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            if (arr[j] < arr[i]) {
+                dp[i] = max(dp[i], dp[j] + 1);  // 这里有问题
+            }
+        }
+    }
+    return *max_element(dp.begin(), dp.end());
+}</code></pre>
+                    </div>
+                    <div class="mistake-analysis">
+                        <h4>错误分析</h4>
+                        <p>虽然上面的代码逻辑是正确的，但在某些变种问题中，需要考虑更多的状态转移情况，比如可以跳过某些元素等。</p>
+                    </div>
+                    <div class="mistake-solution">
+                        <h4>正确解法</h4>
+                        <p>基础LIS问题的解法是对的，关键是要理解状态转移的含义：对于每个位置i，查看前面所有小于arr[i]的元素j，取dp[j]+1的最大值。</p>
+                    </div>
+                </div>
+                <div class="mistake-footer">
+                    <div class="mistake-tags">
+                        <span class="tag">动态规划</span>
+                        <span class="tag">LIS</span>
+                        <span class="tag">状态转移</span>
+                    </div>
+                    <div class="mistake-actions">
+                        <button class="btn-edit" onclick="editMistake(this)">编辑</button>
+                        <button class="btn-delete" onclick="deleteMistake(this)">删除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 添加错题模态框 -->
+    <div id="add-mistake-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>添加错题</h2>
+                <button class="modal-close" onclick="closeAddMistakeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="mistake-form">
+                    <div class="form-group">
+                        <label for="mistake-title">标题</label>
+                        <input type="text" id="mistake-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-category">分类</label>
+                        <select id="mistake-category" required>
+                            <option value="">选择分类</option>
+                            <option value="algorithm">算法错误</option>
+                            <option value="implementation">实现错误</option>
+                            <option value="logic">逻辑错误</option>
+                            <option value="syntax">语法错误</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-difficulty">难度</label>
+                        <select id="mistake-difficulty" required>
+                            <option value="">选择难度</option>
+                            <option value="easy">简单</option>
+                            <option value="medium">中等</option>
+                            <option value="hard">困难</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-problem">问题描述</label>
+                        <textarea id="mistake-problem" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-code">错误代码</label>
+                        <textarea id="mistake-code" rows="5" placeholder="粘贴错误代码..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-analysis">错误分析</label>
+                        <textarea id="mistake-analysis" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-solution">正确解法</label>
+                        <textarea id="mistake-solution" rows="5" placeholder="粘贴正确代码或解释..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="mistake-tags">标签（用逗号分隔）</label>
+                        <input type="text" id="mistake-tags" placeholder="如：线段树, lazy标记, 区间更新">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">添加错题</button>
+                        <button type="button" class="btn-cancel" onclick="closeAddMistakeModal()">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="main-v2.js"></script>
+</body>
+</html>
