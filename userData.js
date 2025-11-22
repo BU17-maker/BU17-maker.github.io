@@ -11,7 +11,7 @@
  * 2. 添加社交链接：在socialLinks数组中添加新对象
  * 3. 更新工具列表：在tools对象中修改对应分组
  * 4. 添加项目：在userProjects数组中push新对象
- * 5. 更新错题：在mistakes数组中添加新记录
+ * 5. 更新错题：在mistakesData数组中添加新记录
  * 6. 修改时间轴：在roadmap数组中添加新计划
  * 
  * 与哪些文件耦合：
@@ -176,7 +176,7 @@ const userProjects = [
 ];
 
 // 错题本配置
-const mistakes = [
+const mistakesData = [
     {
         id: 1,
         problemName: "最长上升子序列",
@@ -255,6 +255,6 @@ window.userData = {
     socialLinks,
     tools,
     userProjects,
-    mistakes,
+    mistakesData,
     roadmap
 };
