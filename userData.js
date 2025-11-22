@@ -9,8 +9,8 @@
  * 二次开发指南：
  * 1. 修改个人信息：直接编辑对应的字符串值
  * 2. 添加社交链接：在socialLinks数组中添加新对象
- * 3. 更新工具列表：在tools对象中修改对应分组
- * 4. 添加项目：在userProjects数组中push新对象
+ * 3. 更新工具列表：在toolsData对象中修改对应分组
+ * 4. 添加项目：在projectsData数组中push新对象
  * 5. 更新错题：在mistakesData数组中添加新记录
  * 6. 修改时间轴：在roadmap数组中添加新计划
  * 
@@ -63,7 +63,7 @@ const socialLinks = [
 ];
 
 // 工具收藏夹配置
-const tools = {
+const toolsData = {
     // OJ平台
     oj: [
         {
@@ -152,7 +152,7 @@ const tools = {
 };
 
 // 项目展示配置
-const userProjects = [
+const projectsData = [
     {
         id: 1,
         title: "洛谷 P1001 A+B 题解页面",
@@ -253,8 +253,8 @@ const roadmap = [
 window.userData = {
     userInfo,
     socialLinks,
-    tools,
-    userProjects,
+    toolsData,
+    projectsData,
     mistakesData,
     roadmap
 };
