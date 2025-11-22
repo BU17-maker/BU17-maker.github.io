@@ -176,7 +176,7 @@ const theme = {
     }
 };
 
-/*// 项目展示页面功能
+// 项目展示页面功能
 const projects = {
     init: () => {
         if (!document.querySelector('.projects-grid')) return;
@@ -327,7 +327,7 @@ int main() {
         return projectInfo[projectId] || { title: '项目详情', content: '<p>暂无详细信息</p>' };
     }
 };
-*/
+
 // C++模板页面功能
 const cppTemplates = {
     init: () => {
