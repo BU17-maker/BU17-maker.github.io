@@ -1,5 +1,5 @@
 /**
- * 用户数据配置文件 (v2版本)
+ * 用户数据配置文件
  * 
  * 文件职责：
  * - 集中管理所有个人信息和网站内容
@@ -28,10 +28,10 @@ const userInfo = {
     bio: "停更 OIer，C++ 只会 STL 和基础算法，正在学 Docker 和前端。欢迎一起卷！",
     
     // 联系邮箱
-    email: "your.email@example.com",
+    email: "bushiqi17@163.com",
     
     // 个人简介（显示在主页）
-    description: "一名热爱编程的高中生，专注于算法竞赛和计算机科学学习。喜欢探索新技术，用代码解决实际问题。目前正在学习Docker容器化技术和前端开发，希望能在技术道路上不断进步。"
+    description: "一名热爱编程的高中生，专注于算法竞赛和计算机科学学习。喜欢探索新技术，用代码解决实际问题。希望能在技术道路上不断进步。"
 };
 
 // 社交链接配置
@@ -39,13 +39,13 @@ const socialLinks = [
     {
         name: "GitHub",
         icon: "fab fa-github",
-        url: "https://github.com/yourusername",
+        url: "https://github.com/BU17-maker",
         color: "#fff"
     },
     {
         name: "洛谷",
         icon: "fas fa-code",
-        url: "https://www.luogu.com.cn/user/yourusername",
+        url: "https://www.luogu.com.cn/user/1781118",
         color: "#fff"
     },
     {
@@ -57,7 +57,7 @@ const socialLinks = [
     {
         name: "邮箱",
         icon: "fas fa-envelope",
-        url: "mailto:your.email@example.com",
+        url: "mailto:bushiqi17@163.com",
         color: "#fff"
     }
 ];
