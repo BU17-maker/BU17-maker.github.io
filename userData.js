@@ -12,7 +12,7 @@
  * 3. 更新工具列表：在toolsData对象中修改对应分组
  * 4. 添加项目：在projectsData数组中push新对象
  * 5. 更新错题：在mistakesData数组中添加新记录
- * 6. 修改时间轴：在roadmap数组中添加新计划
+ * 6. 修改时间轴：在roadmapData数组中添加新计划
  * 
  * 与哪些文件耦合：
  * - 所有HTML页面都会引用此文件
@@ -210,7 +210,7 @@ const mistakesData = [
 ];
 
 // 学习路线图配置
-const roadmap = [
+const roadmapData = [
     {
         year: "2025",
         title: "STL源码学习",
@@ -256,5 +256,5 @@ window.userData = {
     toolsData,
     projectsData,
     mistakesData,
-    roadmap
+    roadmapData
 };
