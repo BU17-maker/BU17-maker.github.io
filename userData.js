@@ -10,7 +10,7 @@
  * 1. 修改个人信息：直接编辑对应的字符串值
  * 2. 添加社交链接：在socialLinks数组中添加新对象
  * 3. 更新工具列表：在tools对象中修改对应分组
- * 4. 添加项目：在projects数组中push新对象
+ * 4. 添加项目：在userProjects数组中push新对象
  * 5. 更新错题：在mistakes数组中添加新记录
  * 6. 修改时间轴：在roadmap数组中添加新计划
  * 
@@ -152,7 +152,7 @@ const tools = {
 };
 
 // 项目展示配置
-const projects = [
+const userProjects = [
     {
         id: 1,
         title: "洛谷 P1001 A+B 题解页面",
@@ -254,7 +254,7 @@ window.userData = {
     userInfo,
     socialLinks,
     tools,
-    projects,
+    userProjects,
     mistakes,
     roadmap
 };
