@@ -1,86 +1,27 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BU17- 个人技术博客</title>
-
-    <!-- 基础图标 -->
-    <link rel="icon" href="avatar.png" type="image/png">
-    
-    <!-- Apple 设备 -->
-    <link rel="apple-touch-icon" href="avatar.png">
-    
-    <!-- 现代浏览器 -->
-    <link rel="icon" type="image/png" sizes="32x32" href="avatar-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="avatar-16x16.png">
-    
-    <!-- 新增页面步骤：
-         1) 复制 index-v2.html → new-v2.html
-         2) 只改 <main> 区域，导航栏会自动注入
-         3) 在 _navbar-v2.html 的数组里加入 {name:'New',href:'new-v2.html'} -->
-    
-    <!-- 预加载字体和关键资源 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Font Awesome 6.5 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- 自定义样式 -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- 用户数据 -->
-    <script src="userData.js"></script>
-    
-    <!-- 主要JavaScript -->
-    <script src="main.js"></script>
-    
-</head>
-<body>
-    <!-- 导航栏容器 -->
-    <div id="navbar-container"></div>
-    
-    <!-- 主要内容 -->
-    <main class="container">
-        <div class="main-content">
-            <!-- 头像 -->
-            <img src="avatar.png" alt="头像" class="avatar">
-            
-            <!-- 标题和介绍 -->
-            <h1 class="hero-title">高二男生，停更 OIer</h1>
-            <p class="subtitle">C++ 只会 STL 和基础算法，正在学 Docker 和前端。欢迎一起卷！</p>
-            
-            <!-- 功能介绍 -->
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3><i class="fas fa-tools"></i> 工具收藏</h3>
-                    <p>收集整理各种实用的开发工具和在线服务</p>
-                </div>
-                <div class="feature-card">
-                    <h3><i class="fas fa-code"></i> C++模板</h3>
-                    <p>竞赛常用代码模板，一键复制使用</p>
-                </div>
-                <div class="feature-card">
-                    <h3><i class="fas fa-project-diagram"></i> 项目展示</h3>
-                    <p>个人项目和题解作品集</p>
-                </div>
-                <div class="feature-card">
-                    <h3><i class="fas fa-book"></i> 错题本</h3>
-                    <p>记录犯过的错误，避免重蹈覆辙</p>
-                </div>
-                <div class="feature-card">
-                    <h3><i class="fas fa-route"></i> 学习路线</h3>
-                    <p>技术学习规划和进度追踪</p>
-                </div>
-            </div>
-            
-            <!-- 访问信息 -->
-            <div class="visit-info">
-                <span>访问时间: <span id="visit-time"></span></span>
-                <span>IP地址: <span id="user-ip"></span></span>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+    <html lang="zh-hans">
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+            <!-- width: 视口的宽度,device-width:即设备的宽度
+                 initial-scale: 页面首次加载时的缩放比例 
+                 user-scalable：控制用户是否可以手动缩放页面 -->
+            <meta mane="description" content="Hi，这里是BU17，一名高中牲，曾经的OIer" />
+            <meta mane="og:description" content="Hi，这里是BU17，一名高中牲，曾经的OIer" />
+            <!-- description：搜索时网页描述，og:description：社交媒体分享时网页描述 -->       
+            <meta name="keywords" content="BU17,bu17,布十七,BU17个人网站,个人网站" />
+            <!-- keywords：搜索时关键词 -->
+            <meta name="author" content="BU17" />
+            <!-- author：网站作者 -->
+            <link rel="shortcut icon" href="favicon.ico" />
+            <!-- favicon.ico为网站图标 -->
+            <link rel="stylesheet" type="text/css" href="./styles.css" />
+            <!-- ./styles.css为外部样式表相对坐标 --> 
+            <title>BU17个人网站</title> 
+        </head>
+        <body>
+            <h1>Hello World!</h1>
+            <p>这是BU17的个人网站，正在打算用这个网站练习HTML,CSS以及JavaScript
+                期待我的进步吧！</p>
+        </body>
+    </html>
